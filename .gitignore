@@ -1,0 +1,23 @@
+# Gowin build artifacts
+impl/
+*.gprj.user
+*.fs.user
+*.rpt
+*.log
+*.html
+*.db
+*.bin
+*.binx
+*.tmp
+
+# 保留已发布的预编译比特流
+!prebuilt/*.fs
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

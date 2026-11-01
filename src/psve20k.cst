@@ -1,0 +1,42 @@
+//======================================================================
+// psve20k.cst — Tang Nano 20K (GW2AR-LV18QN88C8/I7) 物理约束
+//
+// HDMI / 按键 / LED 引脚号直接取自官方例程 hdmi.cst（已验证可出图）
+// ★ 片内 SDRAM 的 O_sdram_*/IO_sdram_dq 千万不要写进这里：
+//   GW2AR-18 的 8MB SDRAM 是片内集成，占用器件专用引脚，
+//   由工具自动分配。写了反而报错。
+//======================================================================
+
+// ---------------- HDMI (TMDS 差分对) ----------------
+IO_LOC "O_tmds_clk_p" 33,34;
+IO_PORT "O_tmds_clk_p" IO_TYPE=LVDS25 PULL_MODE=NONE DRIVE=3.5 BANK_VCCIO=3.3;
+IO_LOC "O_tmds_data_p[0]" 35,36;
+IO_PORT "O_tmds_data_p[0]" IO_TYPE=LVDS25 PULL_MODE=NONE DRIVE=3.5 BANK_VCCIO=3.3;
+IO_LOC "O_tmds_data_p[1]" 37,38;
+IO_PORT "O_tmds_data_p[1]" IO_TYPE=LVDS25 PULL_MODE=NONE DRIVE=3.5 BANK_VCCIO=3.3;
+IO_LOC "O_tmds_data_p[2]" 39,40;
+IO_PORT "O_tmds_data_p[2]" IO_TYPE=LVDS25 PULL_MODE=NONE DRIVE=3.5 BANK_VCCIO=3.3;
+
+// ---------------- 系统时钟 ----------------
+IO_LOC "I_clk" 4;
+IO_PORT "I_clk" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+
+// ---------------- 按键（按下为高，内部下拉） ----------------
+IO_LOC "I_key" 87;          // S1：切换显示模式
+IO_PORT "I_key" IO_TYPE=LVCMOS33 PULL_MODE=DOWN SINGLE_RESISTOR=ON BANK_VCCIO=3.3;
+IO_LOC "I_rst" 88;          // S2：切换帧缓存延迟帧数 1..8
+IO_PORT "I_rst" IO_TYPE=LVCMOS33 PULL_MODE=DOWN SINGLE_RESISTOR=ON BANK_VCCIO=3.3;
+
+// ---------------- 状态指示灯 ----------------
+IO_LOC "O_led[4]" 15;
+IO_PORT "O_led[4]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "O_led[3]" 16;
+IO_PORT "O_led[3]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "O_led[2]" 17;
+IO_PORT "O_led[2]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "O_led[1]" 18;
+IO_PORT "O_led[1]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "O_led[0]" 19;
+IO_PORT "O_led[0]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "running" 20;        // 心跳：SDRAM 未就绪快闪，就绪后慢闪
+IO_PORT "running" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
